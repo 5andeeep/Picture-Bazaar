@@ -39,7 +39,7 @@ const SearchBar = ({setInfo}) => {
 
     return (
         <div className='search-comp'>
-            <p><span>Picture</span> <span>Bazaar</span></p>
+            <div className='logo'><span>Picture</span> <span>Bazaar</span></div>
             <input type="text" placeholder='Search'
                 onChange={(event) => setSearch(event.target.value)}
                 value={search}

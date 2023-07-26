@@ -18,17 +18,18 @@ body{
     background-color: white;
     box-shadow: 0px 25px 20px -20px rgba(0, 0, 0, 0.45);
 }
-.search-comp p{
-    margin-right: 100px;
+.logo{
     font-size: 34px;
     font-weight: bold;
+    transition: all 0.3s ease-in-out;
 }
-p > span:first-child{
+.logo > span:first-child{
     color: blue;
 }
 #search-input{
     width: 50%;
     padding: 10px;
+    transition: all 0.3s ease-in-out;
 }
 #search-btn{
     padding: 11px 40px;
@@ -38,6 +39,7 @@ p > span:first-child{
     color: white;
     cursor: pointer;
     border-radius: 4px;
+    transition: all 0.3s ease-in-out;
 }
 .gallery{
     -webkit-column-count: 3;
@@ -56,4 +58,50 @@ p > span:first-child{
 }
 img{
     width: 100%;
+}
+@media (max-width: 999px){
+    .gallery{
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+    }
+}
+@media (max-width: 960px){
+    .logo{
+        font-size: 24px;
+        font-weight: bold;
+    }
+    #search-btn{
+        display: none;
+    }
+    #search-input{
+        width: 70%;
+    }
+}
+@media (max-width: 800px){
+    .gallery{
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+        column-count: 1;
+        -webkit-column-width: 100%;
+        -moz-column-width: 100%;
+        column-width: 100%;
+    }
+    
+}
+@media (max-width: 775px){
+    .logo{
+        font-size: 20px;
+    }
+}
+@media (max-width: 750px){
+    .logo{
+        display: flex;
+        flex-direction: column;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    #search-input{
+        width: 80%;
+    }
 }
