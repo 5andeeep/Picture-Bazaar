@@ -1,25 +1,19 @@
 import React from "react";
+import SingleImage from "./SingleImage";
 
 const ImageList = ({ images }) => {
-    console.log(images);
-  return (
-    <>
-      <div className="gallery">
-        {images &&
-          images.map((image, index) => {
-            return (
-              <div className="image">
-                <img
-                  src={image.urls.small}
-                  alt={image.description}
-                  key={index}
-                />
-              </div>
-            );
-          })}
-      </div>
-    </>
-  );
+    return (
+      <>
+        <div className="gallery">
+          {images &&
+            images.map((image, index) => {
+              return (
+                <SingleImage image={image} key={index}/>
+              );
+            })}
+        </div>
+      </>
+    );
 };
 
 export default ImageList;
