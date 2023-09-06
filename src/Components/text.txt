@@ -1,0 +1,93 @@
+async function searchImage(){
+        try{
+            let response = await axios.get("https://api.unsplash.com/search/photos/", {
+                params: {
+                    query : search || "random",
+                    per_page: 10,
+                    page: page
+                },
+                headers: {
+                    Authorization : `Client-ID ${process.env.REACT_APP_CLIENT_ID}`
+                }
+            })
+            const data = response.data.results;
+            console.log(data);
+            setInfo((prev) => [...prev, ...data]);
+            setLoading(false);
+        }
+        catch(e){
+            console.log("Error: ", e);
+            setLoading(false);
+        }
+    }
+
+
+    const handleInfiniteScroll = async () => {
+        try{
+            if(window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight){
+                setLoading(true);
+                setPage((prev) => prev + 1);
+            }
+        }
+        catch(e){
+            console.log("Scrolling func Error ", e);
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleInfiniteScroll);
+        return () => window.removeEventListener("scroll", handleInfiniteScroll);
+    }, []);
+
+
+
+
+const [searchQuery, setSearchQuery] = useState('');
+    const [page, setPage] = useState(1);
+    const [photos, setPhotos] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const fetchData = async () => {
+        let url;
+        let urlPage = `&page=${page}`;
+        const urlSearchQuery = `&query=${searchQuery}`;
+
+        if(searchQuery){
+            url = `${base}search/photos?client_id=${process.env.REACT_APP_CLIENT_ID}${urlPage}${urlSearchQuery}`;
+        }
+        else{
+            url = `${base}photos/?client_id=${process.env.REACT_APP_CLIENT_ID}${urlPage}`;
+        }
+        try{
+            const response = await fetch(url);
+            const data = await response.json();
+            console.log(data.results);
+            setPhotos((oldImages) => {
+                if(!searchQuery && page === 1){
+                    return data;
+                }
+                else if(searchQuery){
+                    return [...oldImages, ...data];
+                }
+                else{
+                    return [...oldImages, ...data]
+                }
+            });
+            setLoading(false);
+        }
+        catch(e){
+            console.log("error while fetching data ", e);
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, [page]);
+
+    const handleKeyPress = (e) => {
+        if(e.key === "Enter"){
+            e.preventDefault();
+            fetchData();
+        }
+    }
