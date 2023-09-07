@@ -3,13 +3,11 @@ import React from "react";
 const SingleImage = ({
     urls: { small, full },
     alt_description,
-    likes,
     user: {
       name,
       links: {
         html
       },
-      portfolio_url,
       profile_image: { medium },
     },
     index
@@ -32,13 +30,8 @@ const SingleImage = ({
                 key={index}
             />
             <div className="picture-info">
-                <div>
-                    <h4>{name}</h4>
-                    <p>{likes}</p>
-                </div>
                 <img src={medium} id="owner-img" alt="onwerImage" onClick={clickOnOwner}/>
-                {/* <a href={html}>
-                </a> */}
+                <h4>{name}</h4>
             </div>
         </div>
     );

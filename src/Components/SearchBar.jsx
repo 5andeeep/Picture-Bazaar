@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import ImageList from './ImageList';
 import SingleImage from "./SingleImage";
 import Loading from "./Loading";
 
@@ -14,8 +13,6 @@ const SearchBar = () => {
     const [page, setPage] = useState(1); //page
     const [query, setQuery] = useState(""); //query
 
-    console.log(photos);
-
     const fetchImages = async () => {
         setLoading(true);
         let url;
@@ -27,7 +24,6 @@ const SearchBar = () => {
         } else {
             url = `${base}photos/?client_id=${process.env.REACT_APP_CLIENT_ID}${urlPage}`;
         }
-
         try {
             const response = await fetch(url);
             const data = await response.json();
